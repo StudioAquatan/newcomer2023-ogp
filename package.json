@@ -4,13 +4,34 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler publish src/index.ts"
+    "deploy": "wrangler publish src/index.ts",
+    "stylelint": "stylelint --ignore-path .gitignore \"./**/*.{ts,tsx}\"",
+    "fix": "yarn stylelint --fix && yarn format",
+    "prettier": "prettier --config .prettierrc.json \"./**/*.{ts,tsx,json,md}\"",
+    "format": "yarn prettier --write",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "hono": "^3.0.2"
+    "hono": "^3.0.2",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20221111.1",
+    "@stylelint/postcss-css-in-js": "^0.38.0",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "postcss-syntax": "^0.36.2",
+    "prettier": "^2.8.4",
+    "stylelint": "^15.2.0",
+    "stylelint-config-idiomatic-order": "^9.0.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^4.0.0",
+    "stylelint-config-standard": "^30.0.1",
+    "stylelint-prettier": "^3.0.0",
     "wrangler": "^2.7.1"
   }
 }
