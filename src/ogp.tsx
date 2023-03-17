@@ -8,6 +8,11 @@ import { Resvg, initWasm } from "@resvg/resvg-wasm";
 import resvgWasm from "./vender/resvg.wasm";
 import type { ReactNode } from "react";
 import { loadFont } from "./font";
+import Container from "./components/Container";
+import Logo from "./components/Hashtag";
+import Hashtag from "./components/Hashtag";
+import Title from "./components/Title";
+import Recommendation from "./components/Recommendation";
 
 const genModuleInit = () => {
   let isInit = false;
@@ -29,11 +34,11 @@ export const generateImage = async (node: ReactNode) => {
   await moduleInit();
 
   const GenJyuuGothicPNormal = await loadFont(
-    "https://irodori-newcomer-2023-dev.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Normal.ttf"
+    "https://irodori-newcomer2023.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Normal.ttf"
   );
 
   const GenJyuuGothicPBold = await loadFont(
-    "https://irodori-newcomer-2023-dev.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Bold.ttf"
+    "https://irodori-newcomer2023.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Bold.ttf"
   );
 
   const svg = await satori(node, {
@@ -51,6 +56,7 @@ export const generateImage = async (node: ReactNode) => {
         weight: 700,
       },
     ],
+    // debug: true,
   });
 
   const resvg = new Resvg(svg);
@@ -62,24 +68,10 @@ export const generateImage = async (node: ReactNode) => {
 
 export const ogpImage = () => {
   return generateImage(
-    <div
-      style={{
-        display: "flex",
-        width: "100%",
-        height: "100%",
-        backgroundColor: "#fff",
-      }}
-    >
-      <h1
-        style={{
-          fontFamily: "GenJyuuGothic-P, sans-serif",
-          fontWeight: "normal",
-          fontSize: 70,
-          width: "100%",
-        }}
-      >
-        Hello World!
-      </h1>
-    </div>
+    <Container>
+      <Title />
+      <Recommendation />
+      <Hashtag />
+    </Container>
   );
 };
