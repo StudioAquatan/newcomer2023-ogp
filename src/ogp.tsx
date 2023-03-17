@@ -66,7 +66,7 @@ export const generateImage = async (node: ReactNode) => {
   return pngBuffer;
 };
 
-export const ogpImage = () => {
+export const ogpImage = (userId: string) => {
   return generateImage(
     <Container>
       <Title />
