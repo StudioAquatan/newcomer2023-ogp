@@ -1,4 +1,5 @@
 name = "newcomer2023-ogp"
+main = "src/index.ts"
 compatibility_date = "2023-01-01"
 kv_namespaces = [
   { binding = "OGP_KV", id = "83392f9da1fa467aabe1b63051a993f1", preview_id = "be8ea5aaf91648938eab044b473e9fc4" }
