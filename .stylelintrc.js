@@ -15,5 +15,6 @@ module.exports = {
     "string-quotes": ["double"],
     "function-name-case": null,
     "function-no-unknown": null,
+    "color-function-notation": "legacy",
   },
 };
