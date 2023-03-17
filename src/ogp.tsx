@@ -28,8 +28,12 @@ const moduleInit = genModuleInit();
 export const generateImage = async (node: ReactNode) => {
   await moduleInit();
 
-  const GenJyuuGothicP = await loadFont(
+  const GenJyuuGothicPNormal = await loadFont(
     "https://irodori-newcomer-2023-dev.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Normal.ttf"
+  );
+
+  const GenJyuuGothicPBold = await loadFont(
+    "https://irodori-newcomer-2023-dev.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Bold.ttf"
   );
 
   const svg = await satori(node, {
@@ -38,8 +42,13 @@ export const generateImage = async (node: ReactNode) => {
     fonts: [
       {
         name: "GenJyuuGothic-P",
-        data: GenJyuuGothicP,
+        data: GenJyuuGothicPNormal,
         weight: 400,
+      },
+      {
+        name: "GenJyuuGothic-P",
+        data: GenJyuuGothicPBold,
+        weight: 700,
       },
     ],
   });
