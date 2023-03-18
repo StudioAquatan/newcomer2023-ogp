@@ -130,7 +130,7 @@ async function fetchOrgs(api: ServiceWorkerGlobalScope) {
   return await response.json<Organization[]>();
 }
 
-type OgpOrg = {
+export type OgpOrg = {
   shortName: string;
   logo: Image;
 };

@@ -13,6 +13,7 @@ import Logo from "./components/Hashtag";
 import Hashtag from "./components/Hashtag";
 import Title from "./components/Title";
 import Recommendation from "./components/Recommendation";
+import { OgpOrg } from "./query";
 
 const genModuleInit = () => {
   let isInit = false;
@@ -66,11 +67,11 @@ export const generateImage = async (node: ReactNode) => {
   return pngBuffer;
 };
 
-export const ogpImage = (userId: string) => {
+export const ogpImage = (props: { orgs: OgpOrg[] }) => {
   return generateImage(
     <Container>
       <Title />
-      <Recommendation />
+      <Recommendation {...props} />
       <Hashtag />
     </Container>
   );

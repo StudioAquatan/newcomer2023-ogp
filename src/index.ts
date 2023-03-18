@@ -26,13 +26,13 @@ app.get("/", async (ctx) => {
   }
 
   // キャッシュに無ければ生成
-  return ctx.json(await getTop3RecommendedOrgs(ctx.env, userId));
-  // const ogp = await ogpImage(userId);
+  const orgs = await getTop3RecommendedOrgs(ctx.env, userId);
+  const ogp = await ogpImage({ orgs: orgs });
   // await ctx.env.OGP_KV.put(kvId(userId), ogp, {
   //   expirationTtl: 3600,
   // });
 
-  // return ctx.body(ogp);
+  return ctx.body(ogp);
 });
 
 export default app;

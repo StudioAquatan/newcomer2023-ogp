@@ -1,24 +1,5 @@
 import { ReactNode } from "react";
-
-type RecommendationItemType = {
-  orgName: string;
-  orgLogoSrc: string;
-};
-
-const recommendationItems: RecommendationItemType[] = [
-  {
-    orgName: "あくあたん工房",
-    orgLogoSrc: "https://irodori-newcomer2023.pages.dev/org_icons/default.png",
-  },
-  {
-    orgName: "ForteFibre",
-    orgLogoSrc: "https://irodori-newcomer2023.pages.dev/org_icons/default.png",
-  },
-  {
-    orgName: "アニメーション研究会",
-    orgLogoSrc: "https://irodori-newcomer2023.pages.dev/org_icons/default.png",
-  },
-];
+import { OgpOrg } from "../query";
 
 function Container({ children }: { children: ReactNode }) {
   return (
@@ -49,7 +30,7 @@ function ItemContainer({ children }: { children: ReactNode }) {
   );
 }
 
-function RecommendationItem(props: RecommendationItemType) {
+function RecommendationItem({ shortName, logo }: OgpOrg) {
   return (
     <div
       style={{
@@ -61,7 +42,7 @@ function RecommendationItem(props: RecommendationItemType) {
       }}
     >
       <img
-        src={props.orgLogoSrc}
+        src={logo.src}
         style={{
           width: "80px",
           height: "80px",
@@ -78,13 +59,13 @@ function RecommendationItem(props: RecommendationItemType) {
           padding: 0,
         }}
       >
-        {props.orgName}
+        {shortName}
       </p>
     </div>
   );
 }
 
-export default function Recommendation() {
+export default function Recommendation({ orgs }: { orgs: OgpOrg[] }) {
   return (
     <Container>
       <p
@@ -100,7 +81,7 @@ export default function Recommendation() {
         あなたへのおすすめTOP3は...
       </p>
       <ItemContainer>
-        {recommendationItems.map((item, index) => {
+        {orgs.map((item, index) => {
           return <RecommendationItem key={index} {...item} />;
         })}
       </ItemContainer>
