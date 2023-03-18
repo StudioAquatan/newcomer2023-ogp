@@ -1,10 +1,18 @@
 name = "newcomer2023-ogp"
 main = "src/index.ts"
 compatibility_date = "2023-01-01"
+
 kv_namespaces = [
   { binding = "OGP_KV", id = "83392f9da1fa467aabe1b63051a993f1", preview_id = "be8ea5aaf91648938eab044b473e9fc4" }
 ]
+services = [
+  { binding = "API", service = "newcomer2023-api" },
+]
 
+[env.development]
+kv_namespaces = [
+  { binding = "OGP_KV", id = "be8ea5aaf91648938eab044b473e9fc4", preview_id = "be8ea5aaf91648938eab044b473e9fc4" }
+]
 services = [
   { binding = "API", service = "newcomer2023-api-dev" },
 ]
@@ -13,4 +21,10 @@ services = [
 binding = "DB"
 database_name = "newcomer2023"
 database_id = "88d9c498-a2f3-4284-b680-1a733416ee69"
+preview_database_id = "846cb66e-9c26-4a7d-9250-e3df185ca7b2"
+
+[[ env.development.d1_databases ]]
+binding = "DB"
+database_name = "newcomer2023-dev"
+database_id = "846cb66e-9c26-4a7d-9250-e3df185ca7b2"
 preview_database_id = "846cb66e-9c26-4a7d-9250-e3df185ca7b2"
