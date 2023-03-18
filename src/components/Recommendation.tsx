@@ -30,7 +30,7 @@ function ItemContainer({ children }: { children: ReactNode }) {
   );
 }
 
-function RecommendationItem({ shortName, logo }: OgpOrg) {
+function RecommendationItem({ shortName, logoFocus, logo }: OgpOrg) {
   return (
     <div
       style={{
@@ -47,6 +47,7 @@ function RecommendationItem({ shortName, logo }: OgpOrg) {
           width: "80px",
           height: "80px",
           borderRadius: "5px",
+          objectFit: logoFocus ? "cover" : "contain",
         }}
       />
       <p

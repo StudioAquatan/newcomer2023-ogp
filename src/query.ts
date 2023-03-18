@@ -132,6 +132,7 @@ async function fetchOrgs(api: ServiceWorkerGlobalScope) {
 
 export type OgpOrg = {
   shortName: string;
+  logoFocus: boolean;
   logo: Image;
 };
 
@@ -172,6 +173,7 @@ export async function getTop3RecommendedOrgs(
 
     top3.push({
       shortName: org.shortName,
+      logoFocus: org.logoFocus,
       logo: org.logo,
     });
 
