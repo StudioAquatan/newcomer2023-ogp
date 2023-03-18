@@ -14,11 +14,6 @@ const kvId = (userId: string) => `ogp-${userId}`;
 app.get("/", async (ctx) => {
   const userId = ctx.req.query("uid");
   if (!userId) return ctx.status(404);
-});
-
-app.get("/", async (ctx) => {
-  const userId = ctx.req.query("uid");
-  if (!userId) return ctx.status(404);
 
   ctx.header("Cache-Control", "max-age=3600");
   // キャッシュからバイナリで取得
