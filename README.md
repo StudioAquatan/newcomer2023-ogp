@@ -13,3 +13,16 @@
 - Wrangler V2 / Miniflare
 - satori
 
+## deploy
+
+本番用
+
+```bash
+yarn deploy
+```
+
+開発用
+
+```bash
+yarn deploy --env development
+```
