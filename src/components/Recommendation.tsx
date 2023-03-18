@@ -57,6 +57,7 @@ function RecommendationItem({ shortName, logoFocus, logo }: OgpOrg) {
           fontSize: "40px",
           textAlign: "left",
           margin: 0,
+          marginLeft: "40px",
           padding: 0,
         }}
       >
