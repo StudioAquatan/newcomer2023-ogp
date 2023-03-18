@@ -1,4 +1,5 @@
 import { HTTPException } from "hono/http-exception";
+import { Env } from ".";
 
 type RecommendResult = {
   id: string;
@@ -115,17 +116,18 @@ type Organization = {
   links?: string[];
 };
 
-async function fetchOrgs() {
-  const response = await fetch(
+async function fetchOrgs(api: ServiceWorkerGlobalScope) {
+  const response = await api.fetch(
     "https://newcomer2023-api-dev.studioaquatan.workers.dev/orgs"
   );
 
   if (!response.ok) {
-    console.log(response.statusText);
+    console.log(response.status, response.statusText);
+    console.log(await response.text());
     throw new HTTPException(500, { message: "Failed to fetch orgs" });
   }
 
-  return response.json<Organization[]>();
+  return await response.json<Organization[]>();
 }
 
 type OgpOrg = {
@@ -134,13 +136,13 @@ type OgpOrg = {
 };
 
 export async function getTop3RecommendedOrgs(
-  db: D1Database,
+  env: Env,
   userId: string
 ): Promise<OgpOrg[]> {
   const [recommend, exclusion, orgs] = await Promise.all([
-    fetchRecommendation(db, userId),
-    fetchExclusion(db, userId),
-    fetchOrgs(),
+    fetchRecommendation(env.DB, userId),
+    fetchExclusion(env.DB, userId),
+    fetchOrgs(env.API),
   ]);
 
   const applied = applyExclusion(recommend.orgs, exclusion);

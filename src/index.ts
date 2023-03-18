@@ -3,6 +3,7 @@ import { ogpImage } from "./ogp";
 import { getTop3RecommendedOrgs } from "./query";
 
 export type Env = {
+  API: ServiceWorkerGlobalScope;
   DB: D1Database;
   OGP_KV: KVNamespace;
 };
@@ -25,7 +26,7 @@ app.get("/", async (ctx) => {
   }
 
   // キャッシュに無ければ生成
-  return ctx.json(await getTop3RecommendedOrgs(ctx.env.DB, userId));
+  return ctx.json(await getTop3RecommendedOrgs(ctx.env, userId));
   // const ogp = await ogpImage(userId);
   // await ctx.env.OGP_KV.put(kvId(userId), ogp, {
   //   expirationTtl: 3600,
