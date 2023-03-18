@@ -10,6 +10,7 @@ services = [
 ]
 
 [env.development]
+name = "newcomer2023-ogp-dev"
 kv_namespaces = [
   { binding = "OGP_KV", id = "be8ea5aaf91648938eab044b473e9fc4", preview_id = "be8ea5aaf91648938eab044b473e9fc4" }
 ]
