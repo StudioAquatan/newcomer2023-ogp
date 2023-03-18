@@ -37,7 +37,7 @@ export async function fetchRecommendation(
   if (!results.success) {
     throw new HTTPException(500, { message: "Database error" });
   } else if (!results.results?.length) {
-    throw new HTTPException(404, { message: "Not found" });
+    throw new HTTPException(404, { message: "Not found user recommendation" });
   }
 
   return {
