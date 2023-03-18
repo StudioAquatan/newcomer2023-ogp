@@ -8,7 +8,7 @@ const Contents = ({ children }: { children: ReactNode }) => {
         width: "940px",
         height: "600px",
         backgroundColor: "white",
-        boxShadow: "0 10px 16px 0 rgba(0,0,0,20%)",
+        boxShadow: "0 10px 16px 0 rgb(0, 0, 0, 0.2)",
         borderRadius: "10px",
         flexDirection: "column",
         alignItems: "center",

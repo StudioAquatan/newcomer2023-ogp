@@ -15,6 +15,7 @@ module.exports = {
     "string-quotes": ["double"],
     "function-name-case": null,
     "function-no-unknown": null,
+    "alpha-value-notation": null, // rgba(0, 0, 0, 0.5) のように書かないといけない
     "color-function-notation": "legacy",
   },
 };
