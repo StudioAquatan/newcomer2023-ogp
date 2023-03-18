@@ -47,7 +47,9 @@ function RecommendationItem({ shortName, logoFocus, logo }: OgpOrg) {
           width: "80px",
           height: "80px",
           borderRadius: "5px",
+          /* stylelint-disable */
           objectFit: logoFocus ? "cover" : "contain",
+          /* stylelint-enable */
         }}
       />
       <p
