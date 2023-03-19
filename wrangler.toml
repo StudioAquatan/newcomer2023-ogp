@@ -29,3 +29,13 @@ binding = "DB"
 database_name = "newcomer2023-dev"
 database_id = "846cb66e-9c26-4a7d-9250-e3df185ca7b2"
 preview_database_id = "846cb66e-9c26-4a7d-9250-e3df185ca7b2"
+
+[[ r2_buckets ]]
+binding = "ASSETS"
+bucket_name = "newcomer2023"
+preview_bucket_name = "newcomer2023"
+
+[[ env.development.r2_buckets ]]
+binding = "ASSETS"
+bucket_name = "newcomer2023"
+preview_bucket_name = "newcomer2023"

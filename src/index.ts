@@ -6,6 +6,7 @@ export type Env = {
   API: ServiceWorkerGlobalScope;
   DB: D1Database;
   OGP_KV: KVNamespace;
+  ASSETS: R2Bucket;
 };
 
 const app = new Hono<{ Bindings: Env }>();
