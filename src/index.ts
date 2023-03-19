@@ -6,6 +6,7 @@ export type Env = {
   API: ServiceWorkerGlobalScope;
   DB: D1Database;
   OGP_KV: KVNamespace;
+  OGP_QUEUE: Queue;
   ASSETS: R2Bucket;
 };
 
@@ -36,18 +37,13 @@ app.get("/", async (ctx) => {
   return ctx.body(ogp);
 });
 
-app.put("/", async (ctx) => {
+app.post("/", async (ctx) => {
   const userId = ctx.req.query("uid");
   if (!userId) return ctx.status(404);
 
-  // キャッシュを上書き
-  const orgs = await getTop3RecommendedOrgs(ctx.env, userId);
-  const ogp = await ogpImage({ env: ctx.env, orgs: orgs });
-  await ctx.env.OGP_KV.put(kvId(userId), ogp, {
-    expirationTtl: 3600,
-  });
+  await ctx.env.OGP_QUEUE.send(userId);
 
-  return ctx.status(200);
+  return ctx.json({ status: "Enqueued" }, 202);
 });
 
 app.delete("/", async (ctx) => {
@@ -56,7 +52,22 @@ app.delete("/", async (ctx) => {
 
   // キャッシュを削除
   await ctx.env.OGP_KV.delete(kvId(userId));
-  return ctx.status(200);
+  return ctx.status(204);
 });
 
-export default app;
+export default {
+  fetch: app.fetch,
+  // Cloudflare QueueでOGP画像生成を非同期化
+  async queue(batch: MessageBatch<string>, env: Env) {
+    const messages: string[] = batch.messages.map((msg) => msg.body);
+    for (const message of batch.messages) {
+      const userId = message.body;
+      // OGP画像を生成して、キャッシュを上書き
+      const orgs = await getTop3RecommendedOrgs(env, userId);
+      const ogp = await ogpImage({ env: env, orgs: orgs });
+      await env.OGP_KV.put(kvId(userId), ogp, {
+        expirationTtl: 3600,
+      });
+    }
+  },
+};

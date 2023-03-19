@@ -39,3 +39,23 @@ preview_bucket_name = "newcomer2023"
 binding = "ASSETS"
 bucket_name = "newcomer2023"
 preview_bucket_name = "newcomer2023"
+
+[[ queues.producers ]]
+queue = "newcomer2023-ogp-queue"
+binding = "OGP_QUEUE"
+
+[[queues.consumers]]
+queue = "newcomer2023-ogp-queue"
+max_batch_size = 10
+max_batch_timeout = 10
+max_retries = 1
+
+[[ env.development.queues.producers ]]
+queue = "newcomer2023-ogp-queue-dev"
+binding = "OGP_QUEUE"
+
+[[ env.development.queues.consumers ]]
+queue = "newcomer2023-ogp-queue-dev"
+max_batch_size = 10
+max_batch_timeout = 10
+max_retries = 1
