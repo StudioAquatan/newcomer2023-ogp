@@ -14,6 +14,7 @@ import Hashtag from "./components/Hashtag";
 import Title from "./components/Title";
 import Recommendation from "./components/Recommendation";
 import { OgpOrg } from "./query";
+import { Env } from ".";
 
 const genModuleInit = () => {
   let isInit = false;
@@ -31,16 +32,12 @@ const genModuleInit = () => {
 
 const moduleInit = genModuleInit();
 
-export const generateImage = async (node: ReactNode) => {
+export const generateImage = async (env: Env, node: ReactNode) => {
   await moduleInit();
 
-  const GenJyuuGothicPNormal = await loadFont(
-    "https://irodori-newcomer2023.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Normal.ttf"
-  );
+  const GenJyuuGothicPNormal = await loadFont(env, "normal.woff");
 
-  const GenJyuuGothicPBold = await loadFont(
-    "https://irodori-newcomer2023.pages.dev/fonts/GenJyuuGothicP/GenJyuuGothic-P-Bold.ttf"
-  );
+  const GenJyuuGothicPBold = await loadFont(env, "bold.woff");
 
   const svg = await satori(node, {
     width: 1200,
@@ -67,11 +64,12 @@ export const generateImage = async (node: ReactNode) => {
   return pngBuffer;
 };
 
-export const ogpImage = (props: { orgs: OgpOrg[] }) => {
+export const ogpImage = ({ env, ...rest }: { env: Env; orgs: OgpOrg[] }) => {
   return generateImage(
+    env,
     <Container>
       <Title />
-      <Recommendation {...props} />
+      <Recommendation {...rest} />
       <Hashtag />
     </Container>
   );
