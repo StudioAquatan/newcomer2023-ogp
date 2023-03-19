@@ -39,7 +39,7 @@ export default function Hashtag() {
           fontSize: "32px",
         }}
       >
-        #KIT相性診断
+        #工繊50団体相性診断
       </h3>
       <StudioAquatan />
     </div>
