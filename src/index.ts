@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { ogpImage } from "./ogp";
 import { getTop3RecommendedOrgs } from "./query";
 
@@ -11,6 +12,21 @@ export type Env = {
 };
 
 const app = new Hono<{ Bindings: Env }>();
+
+app.use(
+  "*",
+  cors({
+    origin(origin) {
+      return origin.includes("//localhost") ||
+        origin.includes("irodori-newcomer2023.pages.dev")
+        ? origin
+        : "https://irodori-newcomer2023.pages.dev";
+    },
+    credentials: false,
+    allowHeaders: ["Content-Type"],
+    allowMethods: ["GET", "POST", "DELETE"],
+  })
+);
 
 const kvId = (userId: string) => `ogp-${userId}`;
 
