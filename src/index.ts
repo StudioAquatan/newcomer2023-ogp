@@ -28,7 +28,7 @@ app.get("/", async (ctx) => {
 
   // キャッシュに無ければ生成
   const orgs = await getTop3RecommendedOrgs(ctx.env, userId);
-  const ogp = await ogpImage({ orgs: orgs });
+  const ogp = await ogpImage({ env: ctx.env, orgs: orgs });
   await ctx.env.OGP_KV.put(kvId(userId), ogp, {
     expirationTtl: 3600,
   });
