@@ -36,4 +36,27 @@ app.get("/", async (ctx) => {
   return ctx.body(ogp);
 });
 
+app.put("/", async (ctx) => {
+  const userId = ctx.req.query("uid");
+  if (!userId) return ctx.status(404);
+
+  // キャッシュを上書き
+  const orgs = await getTop3RecommendedOrgs(ctx.env, userId);
+  const ogp = await ogpImage({ env: ctx.env, orgs: orgs });
+  await ctx.env.OGP_KV.put(kvId(userId), ogp, {
+    expirationTtl: 3600,
+  });
+
+  return ctx.status(200);
+});
+
+app.delete("/", async (ctx) => {
+  const userId = ctx.req.query("uid");
+  if (!userId) return ctx.status(404);
+
+  // キャッシュを削除
+  await ctx.env.OGP_KV.delete(kvId(userId));
+  return ctx.status(200);
+});
+
 export default app;
