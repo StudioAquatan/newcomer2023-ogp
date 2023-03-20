@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import replaceImgixUrl from "./image-loader";
 import { ogpImage } from "./ogp";
 import { getTop3RecommendedOrgs } from "./query";
 
@@ -48,7 +49,8 @@ app.get("/", async (ctx) => {
 
   // キャッシュに無ければ生成
   const orgs = await getTop3RecommendedOrgs(ctx.env, userId);
-  const ogp = await ogpImage({ env: ctx.env, orgs: orgs });
+  const orgsWithImgix = replaceImgixUrl({ env: ctx.env, orgs: orgs });
+  const ogp = await ogpImage({ env: ctx.env, orgs: orgsWithImgix });
   await ctx.env.OGP_KV.put(kvId(userId), ogp, {
     expirationTtl: 3600,
   });
@@ -83,7 +85,8 @@ export default {
       const userId = message.body;
       // OGP画像を生成して、キャッシュを上書き
       const orgs = await getTop3RecommendedOrgs(env, userId);
-      const ogp = await ogpImage({ env: env, orgs: orgs });
+      const orgsWithImgix = replaceImgixUrl({ env: env, orgs: orgs });
+      const ogp = await ogpImage({ env: env, orgs: orgsWithImgix });
       await env.OGP_KV.put(kvId(userId), ogp, {
         expirationTtl: 3600,
       });

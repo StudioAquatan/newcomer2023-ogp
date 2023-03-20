@@ -1,6 +1,14 @@
-const Irodukun = () => (
+import { Env } from "..";
+import replaceImgixUrl, { imgixLoader } from "../image-loader";
+
+const Irodukun = ({ env }: { env: Env }) => (
   <img
-    src="https://irodori-newcomer2023.pages.dev/org_icons/irodori_logo.png"
+    src={imgixLoader({
+      env: env,
+      src: `${env.RESOURCE_URL}/irodori_logo.png`,
+      width: 30,
+      quality: 75,
+    })}
     style={{
       width: "30px",
       height: "30px",
@@ -8,9 +16,14 @@ const Irodukun = () => (
   />
 );
 
-const StudioAquatan = () => (
+const StudioAquatan = ({ env }: { env: Env }) => (
   <img
-    src="https://irodori-newcomer2023.pages.dev/org_icons/studioaquatan.png"
+    src={imgixLoader({
+      env: env,
+      src: `${env.RESOURCE_URL}/studioaquatan.png`,
+      width: 30,
+      quality: 75,
+    })}
     style={{
       width: "30px",
       height: "30px",
@@ -18,7 +31,7 @@ const StudioAquatan = () => (
   />
 );
 
-export default function Hashtag() {
+export default function Hashtag({ env }: { env: Env }) {
   return (
     <div
       style={{
@@ -29,7 +42,7 @@ export default function Hashtag() {
         gap: "20px",
       }}
     >
-      <Irodukun />
+      <Irodukun env={env} />
       <h3
         style={{
           padding: 0,
@@ -41,7 +54,7 @@ export default function Hashtag() {
       >
         #工繊50団体相性診断
       </h3>
-      <StudioAquatan />
+      <StudioAquatan env={env} />
     </div>
   );
 }

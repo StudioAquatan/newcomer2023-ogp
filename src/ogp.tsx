@@ -70,7 +70,7 @@ export const ogpImage = ({ env, ...rest }: { env: Env; orgs: OgpOrg[] }) => {
     <Container>
       <Title />
       <Recommendation {...rest} />
-      <Hashtag />
+      <Hashtag env={env} />
     </Container>
   );
 };
