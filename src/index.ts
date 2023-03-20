@@ -51,9 +51,7 @@ app.get("/", async (ctx) => {
   const orgs = await getTop3RecommendedOrgs(ctx.env, userId);
   const orgsWithImgix = replaceImgixUrl({ env: ctx.env, orgs: orgs });
   const ogp = await ogpImage({ env: ctx.env, orgs: orgsWithImgix });
-  await ctx.env.OGP_KV.put(kvId(userId), ogp, {
-    expirationTtl: 3600,
-  });
+  await ctx.env.OGP_KV.put(kvId(userId), ogp);
 
   return ctx.body(ogp);
 });
