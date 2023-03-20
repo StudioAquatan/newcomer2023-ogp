@@ -4,6 +4,9 @@ import { ogpImage } from "./ogp";
 import { getTop3RecommendedOrgs } from "./query";
 
 export type Env = {
+  IMGIX_DOMAIN: string;
+  NEWT_ROOT: string;
+  RESOURCE_URL: string;
   API: ServiceWorkerGlobalScope;
   DB: D1Database;
   OGP_KV: KVNamespace;

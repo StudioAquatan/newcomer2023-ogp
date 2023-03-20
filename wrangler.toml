@@ -18,6 +18,16 @@ services = [
   { binding = "API", service = "newcomer2023-api-dev" },
 ]
 
+[vars]
+IMGIX_DOMAIN = "studioaquatan.imgix.net"
+NEWT_ROOT = "https://storage.googleapis.com/p_63bcc96411c3ecd6f0b5dc8b/"
+RESOURCE_URL = "https://newcomer2023-assets.studioaquatan.workers.dev/assets"
+
+[env.development.vars]
+IMGIX_DOMAIN = "studioaquatan.imgix.net"
+NEWT_ROOT = "https://storage.googleapis.com/p_63bcc96411c3ecd6f0b5dc8b/"
+RESOURCE_URL = "https://newcomer2023-assets.studioaquatan.workers.dev/assets"
+
 [[ d1_databases ]]
 binding = "DB"
 database_name = "newcomer2023"
