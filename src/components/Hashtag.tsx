@@ -52,7 +52,7 @@ export default function Hashtag({ env }: { env: Env }) {
           fontSize: "32px",
         }}
       >
-        #工繊50団体相性診断
+        #工繊53団体相性診断
       </h3>
       <StudioAquatan env={env} />
     </div>
