@@ -14,7 +14,7 @@ import Hashtag from "./components/Hashtag";
 import Title from "./components/Title";
 import Recommendation from "./components/Recommendation";
 import { OgpOrg } from "./query";
-import { Env } from ".";
+import { WorkersEnv } from ".";
 
 const genModuleInit = () => {
   let isInit = false;
@@ -32,7 +32,7 @@ const genModuleInit = () => {
 
 const moduleInit = genModuleInit();
 
-export const generateImage = async (env: Env, node: ReactNode) => {
+export const generateImage = async (env: WorkersEnv, node: ReactNode) => {
   await moduleInit();
 
   const GenJyuuGothicPNormal = await loadFont(env, "normal.woff");
@@ -64,7 +64,13 @@ export const generateImage = async (env: Env, node: ReactNode) => {
   return pngBuffer;
 };
 
-export const ogpImage = ({ env, ...rest }: { env: Env; orgs: OgpOrg[] }) => {
+export const ogpImage = ({
+  env,
+  ...rest
+}: {
+  env: WorkersEnv;
+  orgs: OgpOrg[];
+}) => {
   return generateImage(
     env,
     <Container>

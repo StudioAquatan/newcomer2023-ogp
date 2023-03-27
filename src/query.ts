@@ -1,5 +1,5 @@
 import { HTTPException } from "hono/http-exception";
-import { Env } from ".";
+import { WorkersEnv } from ".";
 
 type RecommendResult = {
   id: string;
@@ -137,7 +137,7 @@ export type OgpOrg = {
 };
 
 export async function getTop3RecommendedOrgs(
-  env: Env,
+  env: WorkersEnv,
   userId: string
 ): Promise<OgpOrg[]> {
   const [recommend, exclusion, orgs] = await Promise.all([

@@ -3,7 +3,7 @@ import replaceImgixUrl from "./image-loader";
 import { ogpImage } from "./ogp";
 import { getTop3RecommendedOrgs } from "./query";
 
-export type Env = {
+export type WorkersEnv = {
   IMGIX_DOMAIN: string;
   NEWT_ROOT: string;
   RESOURCE_URL: string;
@@ -14,7 +14,13 @@ export type Env = {
   ASSETS: R2Bucket;
 };
 
-const app = new Hono<{ Bindings: Env }>();
+export type HonoEnv = { Bindings: WorkersEnv };
+
+const createApplication = (env: WorkersEnv) => {
+  throw new Error("Not implemented");
+};
+
+const app = new Hono<HonoEnv>();
 
 const kvId = (userId: string) => `ogp-${userId}`;
 
@@ -61,7 +67,7 @@ app.delete("/", async (ctx) => {
 export default {
   fetch: app.fetch,
   // Cloudflare QueueでOGP画像生成を非同期化
-  async queue(batch: MessageBatch<string>, env: Env) {
+  async queue(batch: MessageBatch<string>, env: WorkersEnv) {
     const messages: string[] = batch.messages.map((msg) => msg.body);
     for (const message of batch.messages) {
       const userId = message.body;

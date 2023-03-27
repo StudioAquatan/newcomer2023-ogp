@@ -1,7 +1,7 @@
-import { Env } from "..";
+import { WorkersEnv } from "..";
 import replaceImgixUrl, { imgixLoader } from "../image-loader";
 
-const Irodukun = ({ env }: { env: Env }) => (
+const Irodukun = ({ env }: { env: WorkersEnv }) => (
   <img
     src={imgixLoader({
       env: env,
@@ -16,7 +16,7 @@ const Irodukun = ({ env }: { env: Env }) => (
   />
 );
 
-const StudioAquatan = ({ env }: { env: Env }) => (
+const StudioAquatan = ({ env }: { env: WorkersEnv }) => (
   <img
     src={imgixLoader({
       env: env,
@@ -31,7 +31,7 @@ const StudioAquatan = ({ env }: { env: Env }) => (
   />
 );
 
-export default function Hashtag({ env }: { env: Env }) {
+export default function Hashtag({ env }: { env: WorkersEnv }) {
   return (
     <div
       style={{

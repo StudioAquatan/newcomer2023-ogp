@@ -1,8 +1,8 @@
-import { Env } from ".";
+import { WorkersEnv } from ".";
 import { OgpOrg } from "./query";
 
 type ImageLoaderProps = {
-  env: Env;
+  env: WorkersEnv;
   src: string;
   width: number;
   quality: number;
@@ -27,7 +27,7 @@ export default function replaceImgixUrl({
   width = 80,
   quality = 75,
 }: {
-  env: Env;
+  env: WorkersEnv;
   orgs: OgpOrg[];
   width?: number;
   quality?: number;

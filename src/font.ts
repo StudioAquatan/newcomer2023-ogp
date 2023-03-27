@@ -1,8 +1,8 @@
-import { Env } from ".";
+import { WorkersEnv } from ".";
 
 const BASE_URL = "https://newcomer2023-assets.studioaquatan.workers.dev/assets";
 
-export const loadFont = async (env: Env, key: string) => {
+export const loadFont = async (env: WorkersEnv, key: string) => {
   const font = await caches.default.match(`${BASE_URL}/${key}`);
   if (font) return font.arrayBuffer();
 
