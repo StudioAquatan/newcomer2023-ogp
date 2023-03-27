@@ -1,5 +1,5 @@
 import { Exclusion } from "../../models/exclusion";
 
 export interface ExclusionRepository {
-  fetchExclusion(userId: string): Promise<Exclusion[]>;
+  getById(userId: string): Promise<Exclusion[]>;
 }

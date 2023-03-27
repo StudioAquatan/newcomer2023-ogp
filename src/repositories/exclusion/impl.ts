@@ -8,7 +8,7 @@ type ExclusionType = {
 export class ExclusionRepositoryImpl implements ExclusionRepository {
   constructor(private database: D1Database) {}
 
-  async fetchExclusion(userId: string): Promise<ExclusionClass[]> {
+  async getById(userId: string): Promise<ExclusionClass[]> {
     const result = await this.database
       .prepare(`SELECT orgId FROM exclusion WHERE userId = ?`)
       .bind(userId)

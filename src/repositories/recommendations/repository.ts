@@ -12,7 +12,7 @@ type RecommendResult = {
 export class RecommendRepositoryImpl implements RecommendRepository {
   constructor(private database: D1Database) {}
 
-  async fetchRecommend(userId: string): Promise<SimpleRecommend> {
+  async getById(userId: string): Promise<SimpleRecommend> {
     const results = await this.database
       .prepare("SELECT id, orgs FROM recommendation WHERE id = ?")
       .bind(userId)
