@@ -1,5 +1,8 @@
+import { HTTPException } from "hono/http-exception";
 import { getTop3RecommendedOrgs } from "../query";
 import { Exclusion } from "./exclusion";
+import { OgpRecommendItem } from "./ogp";
+import { Organization } from "./orgs";
 
 export class SimpleRecommendItem {
   constructor(public orgId: string, public coefficient: number) {}
@@ -21,12 +24,39 @@ export class RecommendItem {
     });
   }
 
-  static getTopNRecommends(
+  static getTop3Recommends(
     recommends: RecommendItem[],
-    topN: number
-  ): RecommendItem[] {
+    orgs: Organization[]
+  ): OgpRecommendItem[] {
     const sorted = this.sortRecommends(recommends);
-    return sorted.slice(0, topN);
+    const top3: OgpRecommendItem[] = [];
+
+    for (const item of sorted) {
+      // 除外されている団体は無視
+      if (item.isExcluded) continue;
+
+      const org = orgs.find((org) => {
+        return org.id === item.orgId;
+      });
+
+      if (!org) {
+        throw new HTTPException(500, {
+          message:
+            "Recommended organizations is not found in all organizations.",
+        });
+      }
+
+      if (!org.logo) {
+        throw new HTTPException(500, {
+          message: "Recommended organizations has no logo.",
+        });
+      }
+
+      top3.push(new OgpRecommendItem(org.shortName, org.logoFocus, org.logo));
+
+      if (top3.length >= 3) break;
+    }
+    return top3;
   }
 }
 
