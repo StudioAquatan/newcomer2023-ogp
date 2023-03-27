@@ -1,6 +1,8 @@
 import { Context } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { HonoEnv } from "../..";
+import { Imgix } from "../../imgix";
+import { OgpRecommendItem } from "../../models/ogp";
 import { RecommendItem } from "../../models/recommendations";
 import { ExclusionRepository } from "../../repositories/exclusion/repository";
 import {
@@ -12,6 +14,7 @@ import { RecommendRepository } from "../../repositories/recommendations/impl";
 
 export class OgpController {
   constructor(
+    private imgix: Imgix,
     private ogpRepo: OgpImagesRepository,
     private orgRepo: OrganizationRepository,
     private recommendationRepo: RecommendRepository,
@@ -41,6 +44,7 @@ export class OgpController {
 
     const applied = recommends.applyExclusion(exclusion);
     const top3 = RecommendItem.getTop3Recommends(applied, orgs);
+    const top3withImgix = OgpRecommendItem.replaceImgixUrl(this.imgix, top3);
 
     // await this.ogpRepo.setById(userId, ogp);
 
