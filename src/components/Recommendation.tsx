@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { OgpOrg } from "../query";
+import { OgpRecommendItem } from "../models/ogp";
 
 function Container({ children }: { children: ReactNode }) {
   return (
@@ -30,7 +30,7 @@ function ItemContainer({ children }: { children: ReactNode }) {
   );
 }
 
-function RecommendationItem({ shortName, logoFocus, logo }: OgpOrg) {
+function RecommendationItem({ shortName, logoFocus, logo }: OgpRecommendItem) {
   return (
     <div
       style={{
@@ -69,7 +69,7 @@ function RecommendationItem({ shortName, logoFocus, logo }: OgpOrg) {
   );
 }
 
-export default function Recommendation({ orgs }: { orgs: OgpOrg[] }) {
+export default function Recommendation({ orgs }: { orgs: OgpRecommendItem[] }) {
   return (
     <Container>
       <p
