@@ -1,5 +1,4 @@
 import { HTTPException } from "hono/http-exception";
-import { getTop3RecommendedOrgs } from "../query";
 import { Exclusion } from "./exclusion";
 import { OgpRecommendItem } from "./ogp";
 import { Organization } from "./orgs";
