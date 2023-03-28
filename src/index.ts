@@ -61,7 +61,7 @@ const app = new Hono<HonoEnv>();
 
 app.get("/", async (ctx) => {
   const { ogpController } = createApplication(ctx.env);
-  ogpController.getOgp(ctx);
+  return ogpController.getOgp(ctx);
 });
 
 export default {
