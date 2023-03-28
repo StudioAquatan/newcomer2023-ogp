@@ -12,6 +12,8 @@ export class OgpImagesRepositoryImpl implements OgpImagesRepository {
   }
 
   async setById(userId: string, image: Uint8Array): Promise<void> {
-    await this.kv.put(kvId(userId), image);
+    await this.kv.put(kvId(userId), image, {
+      expirationTtl: 3600,
+    });
   }
 }
