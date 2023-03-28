@@ -1,37 +1,24 @@
-import { WorkersEnv } from "..";
-import replaceImgixUrl, { imgixLoader } from "../image-loader";
+type OrgIconProps = {
+  src: string;
+  width?: string;
+  height?: string;
+};
 
-const Irodukun = ({ env }: { env: WorkersEnv }) => (
+const OrgIcon = ({ src, width, height }: OrgIconProps) => (
   <img
-    src={imgixLoader({
-      env: env,
-      src: `${env.RESOURCE_URL}/irodori_logo.png`,
-      width: 30,
-      quality: 75,
-    })}
+    src={src}
     style={{
-      width: "30px",
-      height: "30px",
+      width: width ?? "30px",
+      height: height ?? "30px",
     }}
   />
 );
 
-const StudioAquatan = ({ env }: { env: WorkersEnv }) => (
-  <img
-    src={imgixLoader({
-      env: env,
-      src: `${env.RESOURCE_URL}/studioaquatan.png`,
-      width: 30,
-      quality: 75,
-    })}
-    style={{
-      width: "30px",
-      height: "30px",
-    }}
-  />
-);
+export default function Hashtag({ orgIconSrcs }: { orgIconSrcs: string[] }) {
+  if (orgIconSrcs.length !== 2) {
+    throw new Error(`orgIconSrcs.length must be 2. got ${orgIconSrcs.length}`);
+  }
 
-export default function Hashtag({ env }: { env: WorkersEnv }) {
   return (
     <div
       style={{
@@ -42,7 +29,7 @@ export default function Hashtag({ env }: { env: WorkersEnv }) {
         gap: "20px",
       }}
     >
-      <Irodukun env={env} />
+      <OrgIcon src={orgIconSrcs[0]} />
       <h3
         style={{
           padding: 0,
@@ -54,7 +41,7 @@ export default function Hashtag({ env }: { env: WorkersEnv }) {
       >
         #工繊53団体相性診断
       </h3>
-      <StudioAquatan env={env} />
+      <OrgIcon src={orgIconSrcs[1]} />
     </div>
   );
 }
