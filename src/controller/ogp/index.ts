@@ -40,7 +40,7 @@ export class OgpController {
   }
 
   async getOgp(ctx: Context<HonoEnv>): Promise<Response> {
-    const { userId } = ctx.req.query();
+    const userId = ctx.req.query("uid");
     if (!userId)
       throw new HTTPException(404, {
         message: "uid is required",
