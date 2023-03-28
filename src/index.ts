@@ -59,8 +59,6 @@ const createApplication = (env: WorkersEnv) => {
 
 const app = new Hono<HonoEnv>();
 
-const kvId = (userId: string) => `ogp-${userId}`;
-
 app.get("/", async (ctx) => {
   const { ogpController } = createApplication(ctx.env);
   ogpController.getOgp(ctx);
